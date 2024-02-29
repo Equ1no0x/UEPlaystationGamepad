@@ -11,8 +11,8 @@
 
 #include "hidsdi.h"
 
-#define MAX_NUM_CONTROLLER_BUTTONS 96
-#define MAX_NUM_CONTROLLER_ANALOG 24
+#define MAX_NUM_CONTROLLER_BUTTONS 20
+#define MAX_NUM_CONTROLLER_ANALOG 8
 #define RAW_INPUT_ERROR (uint32)(-1)
 
 class FRawInputWindows;
@@ -62,9 +62,8 @@ struct FRawInputRegisteredDevice
 	{
 	}
 
-	FRawInputRegisteredDevice(const int32 InDeviceType, const uint16 InUsage, const int16 InUsagePage, const HANDLE _handle)
-		: hDevice(_handle)
-		, VendorID(0)
+	FRawInputRegisteredDevice(const int32 InDeviceType, const uint16 InUsage, const int16 InUsagePage)
+		: VendorID(0)
 		, ProductID(0)
 		, DeviceType(InDeviceType)
 		, Usage(InUsage)
@@ -77,16 +76,13 @@ struct FRawInputRegisteredDevice
 	{
 		return (bIsValid && 
 			 Other.bIsValid &&
-			 hDevice == Other.hDevice);
-			 /*
 			 (DeviceType == Other.DeviceType) &&
 			 (Usage == Other.Usage) && 
-			 (UsagePage == Other.UsagePage));*/
+			 (UsagePage == Other.UsagePage));
 	};
-	
+
 	// Driver supplied device name
 	FString DeviceName;
-	HANDLE hDevice;
 
 	// Device identifiers
 	int32 VendorID;
@@ -222,16 +218,14 @@ struct FConnectedDeviceInfo
 {
 public:
 	FConnectedDeviceInfo() {}
-	FConnectedDeviceInfo(FString InDeviceName, const RID_DEVICE_INFO& InRIDDeviceInfo, const HANDLE Handle)
+	FConnectedDeviceInfo(FString InDeviceName, const RID_DEVICE_INFO& InRIDDeviceInfo)
 		: DeviceName(MoveTemp(InDeviceName))
 		, RIDDeviceInfo(InRIDDeviceInfo)
-		, hDevice(Handle)
 	{
 	}
 
 	FString DeviceName;
 	RID_DEVICE_INFO RIDDeviceInfo;
-	HANDLE hDevice;
 };
 
 class FRawInputWindows : public IRawInput, IWindowsMessageHandler
@@ -244,7 +238,7 @@ public:
 
 	// Begin RawInput interface
 	virtual void QueryConnectedDevices() override;	
-	virtual int32 RegisterInputDevice(int32 DeviceType, int32 Flags, uint16 DeviceID, int16 PageID, HANDLE Handle) override;
+	virtual int32 RegisterInputDevice(int32 DeviceType, int32 Flags, uint16 DeviceID, int16 PageID);
 	virtual void RemoveRegisteredInputDevice(int32 DeviceHandle) override;	
 	virtual void BindButtonForDevice(int32 DeviceHandle, FName EventName, int32 ButtonIndex ) override;
 	virtual void BindAnalogForDevice(int32 DeviceHandle, FName EventName, int32 AxisIndex ) override;
