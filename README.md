@@ -97,6 +97,14 @@ DualShock4 v1 (GEN1) contribution and 5.0.3 port - https://github.com/Equ1no0x
 License: <a href="http://creativecommons.org/publicdomain/zero/1.0/" target="_blank">(Creative Commons Zero, CC0)</a>
 <br/>
 You can use this content for personal, educational, and commercial purposes.
-<br/><br/>
-DarknessFX @ <a href="https://dfx.lv" target="_blank">https://dfx.lv</a> | Twitter: <a href="https://twitter.com/DrkFX" target="_blank">@DrkFX</a> <br/>
-Equ1no0x @ <a href="https://noxanimdev.itch.io/" target="_blank">https://noxanimdev.itch.io/</a> | Twitter: <a href="https://twitter.com/Equ1no0x" target="_blank">@Equ1no0x</a> <br/>
+
+##
+
+DarknessFX
+<br/>
+• Website <a href="https://dfx.lv" target="_blank">https://dfx.lv</a><br/>
+• Twitter <a href="https://twitter.com/DrkFX" target="_blank">DrkFX</a><br/><br/>
+Equ1no0x
+<br/>
+• Website <a href="https://noxanimdev.itch.io/" target="_blank">https://noxanimdev.itch.io/</a><br/>
+• Twitter <a href="https://twitter.com/Equ1no0x" target="_blank">Equ1no0x</a><br/>
