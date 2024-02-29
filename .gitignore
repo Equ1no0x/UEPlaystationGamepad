@@ -77,3 +77,7 @@ DerivedDataCache/*
 
 # Ignore Plugins folder
 Plugins/*
+
+# Ignore HoloLense config
+Config/HoloLense/*
+Config/HoloLens/HoloLensEngine.ini
