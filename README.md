@@ -11,19 +11,20 @@ Originally to make DualShock 4 work with Unreal Engine 4 was just a list of RawI
 ## Notes
 
 - You can have all 3 controllers connected to your PC USB.
-	* DualShock3/Sixaxis controllers take priority	
+  - DualShock3/Sixaxis controllers take priority
 - Basic Enhanced Input Action setup (only Buttons and Axes - Pressed and Released), for more information on how to expand and create more Input Actions check <a href="https://docs.unrealengine.com/5.1/en-US/enhanced-input-in-unreal-engine/" target="_blank">Enhanced Input - An overview of the Enhanced Input Plugin.</a> and <a href="https://dev.epicgames.com/community/learning/tutorials/eD13/unreal-engine-enhanced-input-in-ue5" target="_blank">Enhanced Input in UE5 - Official Tutorial</a>.<br/>
 
 ## DPad compatibility with CommonUI
 
 The Playstation controllers DPad use Axis1D directional inputs, the Axis1D register from 0.0f to 8.0f : 0=Top, 2=Right, 4=Bottom, 6=Left, 8=No Input.<br/><br/>
-Unreal Engine doesn't expect DPad directions from axis values, only as buttons pressed/released, to enable compatibility with CommonUI, EnhancedInput, and other XInput gamepads you need to modify the *RawInput Plugin* with the following changes:<br/><br/>
+Unreal Engine doesn't expect DPad directions from axis values, only as buttons pressed/released, to enable compatibility with CommonUI, EnhancedInput, and other XInput gamepads you need to modify the _RawInput Plugin_ with the following changes:<br/><br/>
 If you prefer you can download my source files from:<br/>
 <a href="https://github.com/Equ1no0x/UEPlaystationGamepad/blob/5.0.3/.git_files/RawInputWindows.h" target="_blank">RawInputWindows.h</a><br/>
 <a href="https://github.com/Equ1no0x/UEPlaystationGamepad/blob/5.0.3/.git_files/RawInputWindows.cpp" target="_blank">RawInputWindows.cpp</a><br/>
 <br/>
-*Engine\Plugins\Experimental\RawInput\Source\RawInput\Public\Windows\RawInputWindows.h*<br/>
-*Line 322 at the end of the file, add* :<br/>
+_Engine\Plugins\Experimental\RawInput\Source\RawInput\Public\Windows\RawInputWindows.h_<br/>
+_Line 322 at the end of the file, add_ :<br/>
+
 ```c++
 //Playstation DPad. DPadMap Index size for 8 inputs
 FName DPadMap[7] = {};
@@ -33,10 +34,12 @@ struct PlaystationID {
 	int32 aID; // Array Index
 } psID[3];
 ```
+
 <br/>
 
-*Engine\Plugins\Experimental\RawInput\Source\RawInput\Private\Windows\RawInputWindows.cpp*<br/>
-*Line 84, inside void FRawWindowsDeviceEntry::InitializeNameArrays(), add* : <br/>
+_Engine\Plugins\Experimental\RawInput\Source\RawInput\Private\Windows\RawInputWindows.cpp_<br/>
+_Line 84, inside void FRawWindowsDeviceEntry::InitializeNameArrays(), add_ : <br/>
+
 ```c++
 	DPadMap[0] = FGamepadKeyNames::DPadUp;
 	DPadMap[2] = FGamepadKeyNames::DPadRight;
@@ -47,9 +50,11 @@ struct PlaystationID {
 	psID[1] = { 1356, 2508, 4 }; // DS4 GEN2
 	psID[2] = { 1356, 3302, 7 }; // DualSense
 ```
+
 <br/>
 
-*Line 1049, inside if (DeviceEntry.bNeedsUpdate) { before the endif }, add* : <br/>
+_Line 1049, inside if (DeviceEntry.bNeedsUpdate) { before the endif }, add_ : <br/>
+
 ```c++
 			for (PlaystationID& ps : psID) {
 				if (DeviceEntry.DeviceData.VendorID == ps.vID && DeviceEntry.DeviceData.ProductID == ps.pID) {
@@ -85,6 +90,36 @@ struct PlaystationID {
 }
 ```
 
+## Compile the modified RawInput plugin (Windows)
+
+<br/>
+** NOTE: YOU NEED VISUAL STUDIO INSTALLED ALREADY TO CONTINUE. **<br/>
+<br/>
+
+1. Navigate to the location of your Unreal Engine 5.0.3 installation. Then find the RawInput plugin <br/>
+   - `"UE_5.0\Engine\Plugins\Experimental"` > The RawInput folder is located here, in the root of the Experimental folder. <br/>
+2. Copy the folder, go back into your UE5.0.3 folder, create the Plugins folder, and Paste the RawInput plugin inside. <br/>
+   - Example: `"..\UEPlaystationGamepad\Plugins"` > Paste the RawInput folder in here <br/>
+3. Go back to the engine installation location, but instead, navigate to `"..\UE_5.0\Engine\Build\BatchFiles"` <br/>
+4. Open your preferred console (Powershell, CMD, Terminal) and cd into the directory above. <br/>
+   - Example: Terminal > `cd "..\UE_5.0\Engine\Build\BatchFiles"` <br/>
+5. Once he have that ready, we are going to fill in the information for the command we have to run <br/>
+   This is the full command: <br/>
+   `.\RunUAT.bat BuildPlugin -plugin="Path\To\Project\Folder\Plugins\RawInput.uplugin" -package="Path\To\Project\Folder\Plugins\RawInputModified"` <br/>
+   - The `.\` in `.\RunUAT.bat` is for Windows Terminal/Powershell. <br/>
+	<br/>
+   Let's start modifying the command:
+	<br/>
+- Change `-plugin="Path\To\Project\Folder\RawInput.uplugin"` to have the correct location of your project folder <br/>
+  - Example: "`-plugin="..\UEPlaystationGamepad\Plugins\RawInput.uplugin"` <br/>
+- Change `-package="Path\To\Project\Folder\Plugins\RawInputModified"` to have the correct location of your project folder, plus the name of the new folder that will be generated.
+  - Example: `-package="..\UEPlaystationGamepad\Plugins\RawInputPlaystation"` <br/><br/>
+
+6. Once you have the modified command, paste it into your preferred console, and hit enter. The command should compile the plugin, and generate the new folder. <br/>
+_If you have issues, feel free to reach out through Twitter to Equ1no0x_ <br/>
+7. Delete the older RawInput folder (the unmodified one) and rename the new one if you want to, this is not required. <br/>
+8. Start the project and test it out!
+
 ## Credits
 
 Unreal Engine from Epic Games - https://www.unrealengine.com/ <br/>
@@ -102,9 +137,9 @@ You can use this content for personal, educational, and commercial purposes.
 
 DarknessFX
 <br/>
-• Website <a href="https://dfx.lv" target="_blank">https://dfx.lv</a><br/>
-• Twitter <a href="https://twitter.com/DrkFX" target="_blank">DrkFX</a><br/><br/>
+• Website <a href="https://dfx.lv" target="_blank">https://dfx.lv</a> <br/>
+• Twitter <a href="https://twitter.com/DrkFX" target="_blank">DrkFX</a> <br/><br/>
 Equ1no0x
 <br/>
-• Website <a href="https://noxanimdev.itch.io/" target="_blank">https://noxanimdev.itch.io/</a><br/>
-• Twitter <a href="https://twitter.com/Equ1no0x" target="_blank">Equ1no0x</a><br/>
+• Website <a href="https://noxanimdev.itch.io/" target="_blank">https://noxanimdev.itch.io/</a> <br/>
+• Twitter <a href="https://twitter.com/Equ1no0x" target="_blank">Equ1no0x</a> <br/>
