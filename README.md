@@ -1,17 +1,3 @@
-     .----------------.  .----------------.  .----------------. 
-    | .--------------. || .--------------. || .--------------. |
-    | |  ________    | || |  _________   | || |  ____  ____  | |
-    | | |_   ___ `.  | || | |_   ___  |  | || | |_  _||_  _| | |
-    | |   | |   `. \ | || |   | |_  \_|  | || |   \ \  / /   | |
-    | |   | |    | | | || |   |  _|      | || |    > `' <    | |
-    | |  _| |___.' / | || |  _| |_       | || |  _/ /'`\ \_  | |
-    | | |________.'  | || | |_____|      | || | |____||____| | |
-    | |              | || |              | || |              | |
-    | '--------------' || '--------------' || '--------------' |
-     '----------------'  '----------------'  '----------------' 
-
-           DarknessFX @ https://dfx.lv | Twitter: @DrkFX
-
 # Playstation Gamepad For Unreal Engine 5.0.3
 
 <img src="https://cdn.discordapp.com/attachments/1185312433024282764/1212595159053639811/UEPlaystationGamepad.png?ex=65f2683e&is=65dff33e&hm=c17c1acf1280e9b9d4100925aaf68d7cf65ba8441d1eb7e222614f8746420cce&" width="640px" /> <br/>
@@ -103,7 +89,8 @@ struct PlaystationID {
 
 Unreal Engine from Epic Games - https://www.unrealengine.com/ <br/>
 Playstation DualShock4 Icons by ArksDigital - https://arks.itch.io/ps4-buttons <br/>
-<a href="https://github.com/Equ1no0x">Equ1no0x</a> - DualShock4 Gen1 contribution, 5.0.3 port <br/>
+Base template created by DarknessFX - https://github.com/DarknessFX/UEPlaystationGamepad <br/>
+DualShock4 v1 (GEN1) contribution and 5.0.3 port - https://github.com/Equ1no0x
 
 ## License
 
@@ -111,4 +98,5 @@ License: <a href="http://creativecommons.org/publicdomain/zero/1.0/" target="_bl
 <br/>
 You can use this content for personal, educational, and commercial purposes.
 <br/><br/>
-DarknessFX @ <a href="https://dfx.lv" target="_blank">https://dfx.lv</a> | Twitter: <a href="https://twitter.com/DrkFX" target="_blank">@DrkFX</a> <br/>https://github.com/DarknessFX/UEPlaystationGamepad
+DarknessFX @ <a href="https://dfx.lv" target="_blank">https://dfx.lv</a> | Twitter: <a href="https://twitter.com/DrkFX" target="_blank">@DrkFX</a> <br/>
+Equ1no0x @ <a href="https://noxanimdev.itch.io/" target="_blank">https://noxanimdev.itch.io/</a> | Twitter: <a href="https://twitter.com/Equ1no0x" target="_blank">@Equ1no0x</a> <br/>
